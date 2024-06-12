@@ -7,7 +7,7 @@ const PORT = 3000;
 
 
 // 创建一个写入日志文件的流
-const logFile = fs.createWriteStream('app.log', { flags: 'a' });
+const logFile = fs.createWriteStream('/tmp/app.log', { flags: 'a' });
 const logStdout = process.stdout;
 
 // 重写 console.log 方法

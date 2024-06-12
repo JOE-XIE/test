@@ -85,6 +85,27 @@ app.get('/download/:filename', (req, res) => {
     });
 });
 
+app.get('/tmp/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const file = path.join(__dirname, '.', filename);
+
+    fs.stat(file, (err, stats) => {
+        if (err) {
+            console.error('Error finding file:', err);
+            return res.status(404).send('File not found');
+        }
+        res.sendFile(file, (err) => {
+            if (err) {
+                console.error('Error sending file:', err);
+                if (!res.headersSent) {
+                    return res.status(500).send('Error sending file');
+                }
+            }
+        });
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

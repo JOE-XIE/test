@@ -1,0 +1,15 @@
+node_modules
+dist
+lerna-debug.log
+.idea
+ms-error.log
+es
+build
+out
+output
+.DS_Store
+.vscode/
+packages/_commons/config/startup.json
+vite.dev.js
+.env.local
+eksLogs

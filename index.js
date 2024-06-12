@@ -31,7 +31,8 @@ const PORT = 3000;
 
 // 中间件：禁止 Range 请求
 app.use((req, res, next) => {
-    if (req.headers.range) {
+    const ver = req.query.ver;
+    if (req.headers.range && !ver) {
       res.status(416).send('Range requests are not supported');
     } else {
       next();

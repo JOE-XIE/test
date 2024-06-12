@@ -4,6 +4,17 @@ const fs = require('fs');
 const app = express();
 const PORT = 3000;
 
+
+// 创建一个写入日志文件的流
+const logFile = fs.createWriteStream('app.log', { flags: 'a' });
+const logStdout = process.stdout;
+
+// 重写 console.log 方法
+console.log = function () {
+  logFile.write(util.format.apply(null, arguments) + '\n');
+  logStdout.write(util.format.apply(null, arguments) + '\n');
+}
+
 function isValidFormat(str) {
     // 定义正则表达式，匹配"aa-bb"形式的字符串
     const regex = /^[^-]+-[^-]+$/;
